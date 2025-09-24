@@ -2,22 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Access</title>
+  <title>Enter Access Code</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 100px;
     }
+
     input {
       padding: 10px;
       font-size: 16px;
+      width: 250px;
+      text-transform: uppercase;
     }
+
     button {
       padding: 10px 20px;
       font-size: 16px;
       margin-left: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
     }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
     .error {
       color: red;
       margin-top: 20px;
@@ -26,6 +40,30 @@
 </head>
 <body>
 
-  <h1>Enter Access Code</h1>
-  <input type="text" id="codeInput" placeholder="Enter your code here">
-  <button
+  <h1>Enter Your Access Code</h1>
+
+  <input type="text" id="codeInput" placeholder="Enter your code:">
+  <button onclick="checkCode()">Go</button>
+
+  <div class="error" id="errorMessage"></div>
+
+  <script>
+    const codeMap = {
+      "5THSUNSET": "https://nearpod.com/library/",
+      "6THRIDGE": "https://www.geogebra.org/classic/epawezg3",
+      "7THCOUGARS": "https://mail.google.com/mail/u/0/?tab=rm&ogbl",
+      "8THPAWS": "https://chatgpt.com/"
+    };
+
+    function checkCode() {
+      const input = document.getElementById("codeInput").value.trim().toUpperCase();
+      const errorDiv = document.getElementById("errorMessage");
+
+      if (codeMap.hasOwnProperty(input)) {
+        window.location.href = codeMap[input];
+      } else {
+        errorDiv.textContent = "❌ Invalid code. Please try again.";
+      }
+    }
+
+      
